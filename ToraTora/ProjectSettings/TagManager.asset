@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Anchor
+  - Block
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Block
+  - Item
+  - Wall
   - 
   - 
   - 
@@ -49,4 +53,7 @@ TagManager:
     locked: 0
   - name: Block
     uniqueID: 4086870965
+    locked: 0
+  - name: UI
+    uniqueID: 885238949
     locked: 0

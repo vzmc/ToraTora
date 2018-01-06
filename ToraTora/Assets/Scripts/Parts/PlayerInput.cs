@@ -5,14 +5,14 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
-    private PlayerMovement player;
+    private PlayerControl player;
 
     private void Update()
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
 
-        player.Move(new Vector2(h, v));
+        player.SetDirection((new Vector2(h, v)).normalized);
 
         if(Input.GetButtonDown("Fire"))
         {

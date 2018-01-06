@@ -22,9 +22,11 @@ GameObject:
   - component: {fileID: 212256533069777698}
   - component: {fileID: 50029648436665374}
   - component: {fileID: 58042583935076656}
-  - component: {fileID: 114307670523995596}
   - component: {fileID: 114488198484563600}
-  m_Layer: 0
+  - component: {fileID: 114482496278723866}
+  - component: {fileID: 114764056423931452}
+  - component: {fileID: 114537897794580696}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41,12 +43,12 @@ GameObject:
   - component: {fileID: 4760217504728068}
   - component: {fileID: 212064240649889268}
   - component: {fileID: 120040035934111130}
-  - component: {fileID: 114460529439642132}
   - component: {fileID: 50776710649794746}
   - component: {fileID: 58172497122090212}
-  m_Layer: 0
+  - component: {fileID: 114460529439642132}
+  m_Layer: 8
   m_Name: Anchor
-  m_TagString: Player
+  m_TagString: Anchor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,8 +59,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1195184124189156}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.08, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4760217504728068}
@@ -72,7 +74,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1512842337830962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.55, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4191088168067448}
@@ -142,25 +144,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.125, y: 0}
   serializedVersion: 2
   m_Radius: 0.125
---- !u!114 &114307670523995596
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1195184124189156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3580045fcd545e745bd39908bca6d28c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  anchor: {fileID: 114460529439642132}
 --- !u!114 &114460529439642132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +166,18 @@ MonoBehaviour:
   maxLength: 3
   speed: 10
   radius: 0.55
+--- !u!114 &114482496278723866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195184124189156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c647b4cf75187a144b03f52886d04a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
 --- !u!114 &114488198484563600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,7 +189,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656bb3aeae912ac4a9c127d12307fc54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 114307670523995596}
+  player: {fileID: 114537897794580696}
+--- !u!114 &114537897794580696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195184124189156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa26d8b646fb9534485521aa985023d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basic: {fileID: 114482496278723866}
+  movement: {fileID: 114764056423931452}
+  anchor: {fileID: 114460529439642132}
+--- !u!114 &114764056423931452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1195184124189156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03fb3dde368f3247a49de282faa6e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
 --- !u!120 &120040035934111130
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -275,7 +302,7 @@ LineRenderer:
     alignment: 1
     textureMode: 0
     generateLightingData: 0
-  m_UseWorldSpace: 1
+  m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!212 &212064240649889268
 SpriteRenderer:

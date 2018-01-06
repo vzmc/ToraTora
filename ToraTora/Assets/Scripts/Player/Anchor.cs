@@ -17,8 +17,7 @@ public class Anchor : MonoBehaviour
 
     private Transform parentTransform;
     private Transform _transform;
-    private Rigidbody2D rigidbody2D;
-    private Collider2D collider2D;
+    private Collider2D _collider2D;
 
     private float length;
     private Vector2 velocity;
@@ -45,12 +44,11 @@ public class Anchor : MonoBehaviour
     {
         _transform = transform;
         parentTransform = _transform.parent;
-        rigidbody2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
+        _collider2D = GetComponent<Collider2D>();
 
         Direction = Vector2.right;
         velocity = Direction * speed;
-        SetPositionAndRotation(Direction);
+        SetTransform(Direction);
 
         UpdateState(State.Idle);     
     }
@@ -86,13 +84,13 @@ public class Anchor : MonoBehaviour
             case State.Idle:
                 {
                     length = 0;
-                    collider2D.enabled = false;
+                    _collider2D.enabled = false;
                     _transform.localPosition = Direction * radius;
                     break;
                 }
             case State.Shoot:
                 {
-                    collider2D.enabled = true;
+                    _collider2D.enabled = true;
                     break;
                 }
             case State.Back:
@@ -107,8 +105,7 @@ public class Anchor : MonoBehaviour
     /// </summary>
     private void UpdateLine()
     {
-        line.SetPosition(0, parentTransform.position);
-        line.SetPosition(1, _transform.position);
+        line.SetPosition(0, new Vector3(-(radius + length), 0, 0));
     }
 
     /// <summary>
@@ -139,14 +136,12 @@ public class Anchor : MonoBehaviour
                     break;
                 }
         }
-
-        Debug.Log(length);
     }
 
     /// <summary>
     /// 发射钩爪
     /// </summary>
-    public void Shoot(Vector2 direction)
+    public void Shoot()
     {
         if (state != State.Idle)
         {
@@ -156,13 +151,21 @@ public class Anchor : MonoBehaviour
         UpdateState(State.Shoot);
     }
 
-    
+    public void Back()
+    {
+        if (state != State.Idle)
+        {
+            return;
+        }
+
+        UpdateState(State.Back);
+    }
 
     /// <summary>
     /// 接受方向，设置位置和旋转
     /// </summary>
     /// <param name="direction">方向</param>
-    public void SetPositionAndRotation(Vector2 direction)
+    public void SetTransform(Vector2 direction)
     {
         if(state != State.Idle)
         {
@@ -177,20 +180,25 @@ public class Anchor : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (state != State.Shoot)
         {
-            return;        
+            return;
         }
 
-        switch(collision.tag)
+        switch (collision.transform.tag)
         {
-            case "Player":
+            case "Enemy":
                 {
                     break;
                 }
-            default:
+            case "Block":
+                {
+                    UpdateState(State.Back);
+                    break;
+                }
+            case "Wall":
                 {
                     UpdateState(State.Back);
                     break;
