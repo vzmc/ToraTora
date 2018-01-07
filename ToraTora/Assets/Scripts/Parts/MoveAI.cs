@@ -86,7 +86,7 @@ public class MoveAI : MonoBehaviour
     }
 
     /// <summary>
-    /// 追踪目标
+    /// 追踪移动目标
     /// </summary>
     /// <param name="target">目标</param>
     private void Track(Transform target)
@@ -122,6 +122,10 @@ public class MoveAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 玩家进入追踪范围
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnTrackEnter(Collider2D collision)
     {
         if (!isTrackable)
@@ -133,6 +137,10 @@ public class MoveAI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 玩家离开追踪范围
+    /// </summary>
+    /// <param name="collision"></param>
     public void OnTrackExit(Collider2D collision)
     {
         if (!isTrackable)
@@ -142,4 +150,17 @@ public class MoveAI : MonoBehaviour
             target = null;
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    //if(collision.gameObject.CompareTag("Anchor"))
+    //    //{
+    //    //    return;
+    //    //}
+
+    //    //ContactPoint2D[] contacts = new ContactPoint2D[1];
+    //    //int contactCount;
+    //    //contactCount = collision.GetContacts(contacts);
+    //    //transform.Translate(contacts[0].normal * 0.4f);
+    //}
 }

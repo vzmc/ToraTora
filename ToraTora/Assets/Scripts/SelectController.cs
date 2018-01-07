@@ -11,13 +11,20 @@ public class SelectController : MonoBehaviour
 {
     [SerializeField]
     private RectTransform arrow;        // 选择箭头
+    [SerializeField]
+    private AudioClip selectSE;         // 切换选项时的音效
+    [SerializeField]
+    private AudioClip submitSE;         // 确定时的音效
 
     private RectTransform[] selects;    // 选项的位置数据
 
     private int selectIndex;            // 选择的index, 1 ~ 3;
 
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         selectIndex = 1;
         selects = GetComponentsInChildren<RectTransform>();
         SetArrowPosition();
@@ -46,6 +53,7 @@ public class SelectController : MonoBehaviour
                 {
                     selectIndex = 1;
                 }
+                
             }
             else if (ve > 0)
             {
@@ -55,6 +63,7 @@ public class SelectController : MonoBehaviour
                     selectIndex = selects.Length - 1;
                 }
             }
+            audioSource.Play();
             SetArrowPosition();
         }
     }
@@ -81,8 +90,19 @@ public class SelectController : MonoBehaviour
                 return;
             }
 
-            GameManager.Instance.SelectMode(selectIndex);
-            SceneManager.LoadScene(2);
+            audioSource.clip = submitSE;
+            audioSource.Play();
+
+            Invoke("GotoPlayScene", 1f);
         }
+    }
+
+    /// <summary>
+    /// 进入下一个场景
+    /// </summary>
+    private void GotoPlayScene()
+    {
+        GameManager.Instance.SelectMode(selectIndex);
+        SceneManager.LoadScene(2);
     }
 }

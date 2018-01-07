@@ -177,7 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c647b4cf75187a144b03f52886d04a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1
+  weekPoint: 0
+  hp: 5
 --- !u!114 &114488198484563600
 MonoBehaviour:
   m_ObjectHideFlags: 1

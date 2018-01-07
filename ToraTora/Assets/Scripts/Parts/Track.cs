@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 追踪范围
+/// </summary>
 public class Track : MonoBehaviour
 {
     private MoveAI moveAI;

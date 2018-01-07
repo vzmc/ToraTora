@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 58849585406193192}
   - component: {fileID: 114852248965548534}
   m_Layer: 9
-  m_Name: GameObject
+  m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1097084323182986}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 4.78, y: -3.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -137,7 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c647b4cf75187a144b03f52886d04a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weekPoint: 0
   hp: 2
+  point: 200
 --- !u!114 &114341761828962146
 MonoBehaviour:
   m_ObjectHideFlags: 1

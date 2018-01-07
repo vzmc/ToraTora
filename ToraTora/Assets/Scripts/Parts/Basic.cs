@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 基础数据类
+/// </summary>
 public class Basic : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private GuardType guardType;
+    private WeekPoint weekPoint;
     [SerializeField]
     private int hp = 1;
+    [SerializeField]
+    private int point = 0;
 
     private Renderer[] renderers;
+    private PlaySceneManager manager;
 
     public bool IsInvincible { get; private set; }
     public bool IsDead { get; private set; }
 
+    public WeekPoint WeekPoint
+    {
+        get
+        {
+            return weekPoint;
+        }
+    }
+
     private void Start()
     {
+        manager = PlaySceneManager.Instance;
         renderers = GetComponentsInChildren<Renderer>();
         IsInvincible = false;
         IsDead = false;
@@ -27,10 +42,38 @@ public class Basic : MonoBehaviour, IDamageable
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //TakeDamage(0);
-        //collision.gameObject.GetComponent<IDamageable>().TakeDamage(1)
+        //if(collision.gameObject.CompareTag("Anchor"))
+        //{
+        //    Anchor anchor = collision.gameObject.GetComponent<Anchor>();
+
+        //    switch (weekPoint)
+        //    {
+        //        case WeekPoint.Whole:
+        //            {
+        //                TakeDamage(1);
+        //                break;
+        //            }
+        //        case WeekPoint.Top:
+        //            {
+        //                if(anchor.Direction.y < 0)
+        //                {
+        //                    TakeDamage(1);
+        //                }
+        //                else
+        //                {
+
+        //                }
+        //                break;
+        //            }
+        //    }
+            
+        //}
     }
 
+    /// <summary>
+    /// 造成伤害
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(int damage)
     {
         if (IsInvincible)
@@ -39,6 +82,17 @@ public class Basic : MonoBehaviour, IDamageable
         }
 
         hp -= damage;
+
+        if(damage < 0)
+        {
+            return;
+        }
+
+        //如果是玩家，受到伤害就掉一个宝箱
+        if(CompareTag("Player"))
+        {
+            manager.RemoveTreasure();
+        }
 
         if (hp <= 0)
         {
@@ -62,11 +116,11 @@ public class Basic : MonoBehaviour, IDamageable
         IsInvincible = true;
 
         float timer = 0;
-        float flashTimer = 0.1f;
+        float flashTimer = 0.05f;
 
         while (timer < duration)
         {
-            if (flashTimer > 0.1f)
+            if (flashTimer >= 0.05f)
             {
                 foreach (var r in renderers)
                 {
@@ -95,16 +149,16 @@ public class Basic : MonoBehaviour, IDamageable
     /// <returns></returns>
     private IEnumerator Die()
     {
+        manager.AddScore(point);
         yield return Invincible(1f);
-
         Destroy(gameObject);
     }
 }
 
-public enum GuardType
+public enum WeekPoint
 {
-    None,
+    Whole,
     Top,
     Bottom,
-    Whole,
+    None,
 }

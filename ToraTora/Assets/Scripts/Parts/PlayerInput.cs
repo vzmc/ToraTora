@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 响应玩家的操作输入
+/// </summary>
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField]

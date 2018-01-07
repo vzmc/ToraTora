@@ -8,6 +8,8 @@ TagManager:
   - Anchor
   - Block
   - Wall
+  - Treasure
+  - TreasurePos
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Block
   - Item
   - Wall
-  - 
+  - UIPos
   - 
   - 
   - 

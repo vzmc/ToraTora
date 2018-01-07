@@ -16,10 +16,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int SelectedMode
+    {
+        get
+        {
+            return selectedMode;
+        }
+    }
+
+    public int SelectedStage
+    {
+        get
+        {
+            return selectedStage;
+        }
+    }
+
+    public int Score
+    {
+        get
+        {
+            return score;
+        }
+    }
+
     private int selectedMode;   // 难易度选择，1普通，2简单
     private int selectedStage;  // 选择的关卡编号，0 ~ 4
 
-    private int score;
+    private int score;          // 获得的分数
 
     private void Awake()
     {

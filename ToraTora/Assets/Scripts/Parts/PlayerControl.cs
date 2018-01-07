@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 玩家的行为控制
+/// </summary>
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField]
@@ -39,9 +42,25 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Wall"))
+        {
+            return;
+        }
+
         ContactPoint2D[] contacts = new ContactPoint2D[1];
         int contactCount;
         contactCount = collision.GetContacts(contacts);
         transform.Translate(contacts[0].normal * 0.4f);
+
+        //如果是简单难度，碰到砖块就不掉血
+        if (collision.gameObject.CompareTag("Block"))
+        {
+            if (GameManager.Instance.SelectedMode == 2)
+            {
+                return;
+            }
+        }
+
+        basic.TakeDamage(1);
     }
 }

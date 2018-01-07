@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212291578210235214}
   - component: {fileID: 50138804679187826}
   - component: {fileID: 58700132174422170}
+  - component: {fileID: 114778102034711656}
   m_Layer: 9
   m_Name: Uni
   m_TagString: Enemy
@@ -77,6 +78,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &114778102034711656
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1685380713727714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c647b4cf75187a144b03f52886d04a81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weekPoint: 3
+  hp: 1
 --- !u!212 &212291578210235214
 SpriteRenderer:
   m_ObjectHideFlags: 1

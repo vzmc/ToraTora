@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 行动类
+/// </summary>
 [RequireComponent(typeof(Basic))]
 public class Movement : MonoBehaviour, IMovable
 {
@@ -35,6 +38,13 @@ public class Movement : MonoBehaviour, IMovable
                 return;
             }
         }
+        else
+        {
+            if (basic.IsDead)
+            {
+                return;
+            }
+        }
 
         if (velocity.sqrMagnitude < float.Epsilon)
         {
@@ -50,7 +60,6 @@ public class Movement : MonoBehaviour, IMovable
     /// <param name="dir"></param>
     public void Move(Vector2 dir)
     {
-        Debug.Log(dir);
         velocity = dir * moveSpeed;
     }
 }
